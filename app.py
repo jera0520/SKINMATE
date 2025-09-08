@@ -618,15 +618,15 @@ def resize_image_if_needed(filepath, max_size_mb=1.0, max_dimension=1024):
 @app.route('/analyze', methods=['POST'])
 def analyze_image():
     if 'user_id' not in session:
-        flash('분석을 진행하려면 먼저 로그인해주세요.')
+        flash('분석을 진행하려면 먼저 로그인해주세요.', 'info')
         return redirect(url_for('login'))
     if 'image' not in request.files or request.files['image'].filename == '':
-        flash('파일이 선택되지 않았습니다.')
+        flash('파일이 선택되지 않았습니다.', 'danger')
         return redirect(request.url)
 
     file = request.files['image']
     if not (file and allowed_file(file.filename)):
-        flash('허용되지 않는 파일 형식입니다.')
+        flash('허용되지 않는 파일 형식입니다.', 'danger')
         return redirect(url_for('analysis'))
 
     filename = secure_filename(file.filename)
@@ -638,13 +638,13 @@ def analyze_image():
     resize_image_if_needed(filepath, max_size_mb=1.0)
 
     if not is_face_image(filepath):
-        flash("얼굴이 인식되지 않습니다. 얼굴이 보이는 사진을 업로드해주세요.")
+        flash("얼굴이 인식되지 않습니다. 얼굴이 보이는 사진을 업로드해주세요.", 'danger')
         os.remove(filepath)
         return redirect(url_for('analysis'))
 
     scores = get_skin_scores(filepath)
     if scores is None:
-        flash('피부 점수 분석 중 오류가 발생했습니다.')
+        flash('피부 점수 분석 중 오류가 발생했습니다.', 'danger')
         os.remove(filepath)
         return redirect(url_for('analysis'))
 
