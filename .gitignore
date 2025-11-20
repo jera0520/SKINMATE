@@ -7,10 +7,15 @@ __pycache__/
 env/
 venv/
 .ipynb_checkpoints/
+*.egg-info/
 
 # IDEs
 .vscode/
 .idea/
+.cursor/
+*.swp
+*.swo
+*~
 
 # Logs and temporary files
 *.log
@@ -21,6 +26,8 @@ tmp/
 # OS generated files
 .DS_Store
 Thumbs.db
+.AppleDouble
+.LSOverride
 
 # Build artifacts
 build/
@@ -28,8 +35,23 @@ dist/
 
 # Database files
 *.db
-*.sqlite3.env
+*.sqlite3
+instance/*.db
+instance/*.sqlite3
 
 # Environment variables
 .env
+.env.local
+.env.*.local
+config.json
 instance/skintype-api.json
+
+# Backup files
+*_OLD.*
+*_backup.*
+*.bak
+
+# Test files
+test*.png
+test*.jpg
+test*.jpeg
