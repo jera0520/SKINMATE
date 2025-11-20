@@ -20,7 +20,7 @@
 
 - **AI 피부 분석**: Vertex AI로 5가지 피부 타입 분류, TFLite 모델 3개로 수분/탄력/주름 점수 측정
 - **맞춤형 루틴 추천**: 90개 조합 규칙 엔진을 통해 피부 타입, 계절, 고민별 최적의 아침/저녁 루틴 제공
-- **3,400개 제품 DB**: 화해(Hwahae) 크롤링으로 실시간 제품 데이터 수집 및 추천
+- **2,684개 제품 DB**: 화해(Hwahae) 크롤링으로 수집한 801개 브랜드의 실제 제품 데이터 기반 추천
 - **시각화된 분석 리포트**: 종합 점수, 항목별 점수를 차트와 아이콘으로 직관적으로 표시
 - **분석 기록 관리**: 회원가입 후 과거 분석 기록을 저장하고 피부 상태 변화를 그래프로 추적
 - **직관적인 UI**: 반응형 디자인으로 모바일/데스크톱 모두 지원
@@ -52,23 +52,25 @@
 
 ### 데이터 출처
 
-- **화해(Hwahae)**: 34개 카테고리, 각 100개 제품 수집 (총 3,400개)
-  - 클렌징: 클렌징폼(9종), 클렌징워터, 클렌징오일
-  - 스킨케어: 스킨/토너(8종), 에센스/앰플/세럼(9종), 크림(8종)
-- **제품 정보**: 제품명, 브랜드, 가격, 용량, 이미지, 링크, 랭킹
+- **화해(Hwahae)**: 2개 메인 카테고리, 19개 서브카테고리 수집
+  - **클렌징** (757개): 기본, 모공, 보습, 수분, 트러블, 진정, 각질, 브라이트닝, 안티에이징
+  - **스킨케어** (1,927개): 진정, 보습, 트러블, 리페어, 수분, 모공, 아이케어, 브라이트닝, 각질, 안티에이징
+- **제품 정보**: 제품명, 브랜드, 가격, 용량, 이미지 URL, 링크, 랭킹
+- **수집 일자**: 2025-08-20
 
 ### 전처리 과정
 
-1. **카테고리별 크롤링**: `scripts/crawler.py`로 화해 API 호출
+1. **카테고리별 크롤링**: `scripts/crawler.py`로 화해 웹사이트 크롤링
 2. **데이터 정제**: 중복 제거, NULL 처리, 가격/용량 정규화
 3. **DB 저장**: `scripts/database.py`로 SQLite에 저장
 4. **인덱스 최적화**: main_category, sub_category, scraped_at 인덱스 생성
 
 ### 데이터셋 규모
 
-- **제품 수**: 3,400개 (34개 카테고리 × 100개)
-- **업데이트**: 크롤러 실행 시 자동 갱신
-- **DB 크기**: 약 15MB (이미지 URL만 저장)
+- **총 제품 수**: 2,684개 (클렌징 757개 + 스킨케어 1,927개)
+- **브랜드 수**: 801개
+- **DB 크기**: 1.3MB (이미지 URL만 저장)
+- **업데이트**: 크롤러 실행 시 자동 갱신 가능
 
 ---
 
@@ -119,7 +121,7 @@ SKINMATE/
 
 **products 테이블**: `id, product_id, name, brand, image_url, rank, main_category, middle_category, sub_category, scraped_at`
 
-> **📝 Note**: `instance/skinmate.sqlite` 파일은 샘플 DB로, 3,400개 제품 데이터와 테스트 계정이 포함되어 있습니다.  
+> **📝 Note**: `instance/skinmate.sqlite` 파일은 샘플 DB로, **2,684개 제품 데이터**(클렌징 757개, 스킨케어 1,927개)와 **801개 브랜드**가 포함되어 있습니다.  
 > 실제 배포 시에는 PostgreSQL 등 프로덕션 DB로 마이그레이션을 권장합니다.
 
 ---
@@ -128,34 +130,39 @@ SKINMATE/
 
 <div align="center">
 
-| **gkfla317** | **kimsang21235** | **jera0520** |
+| **kimsang21235** | **gkfla317** | **jera0520** |
 | :------: | :------: | :------: |
-| [<img src="https://github.com/gkfla317.png" height=100 width=100>](https://github.com/gkfla317) | [<img src="https://github.com/kimsang21235.png" height=100 width=100>](https://github.com/kimsang21235) | [<img src="https://github.com/jera0520.png" height=100 width=100>](https://github.com/jera0520) |
-| 메인 개발자 | ML 모델 개발 | 아키텍처 개선 |
+| [<img src="https://github.com/kimsang21235.png" height=100 width=100>](https://github.com/kimsang21235) | [<img src="https://github.com/gkfla317.png" height=100 width=100>](https://github.com/gkfla317) | [<img src="https://github.com/jera0520.png" height=100 width=100>](https://github.com/jera0520) |
+| 팀장 (PM) | Frontend | Backend |
 
 </div>
 
 ### 🧩 역할 분담
 
 **🤝 함께 한 일**
-- 프로젝트 기획 및 데이터 수집
+- 프로젝트 기획 및 요구사항 정의
+- 데이터 수집 및 전처리
 - UI/UX 디자인 및 피드백
 
-**💜 gkfla317** (메인 개발자)
-- Flask 백엔드 구축
-- 프론트엔드 개발 (HTML/CSS/JS)
-- 화해 크롤러 개발
-- 90개 조합 루틴 규칙 설계
-
-**🧡 kimsang21235** (ML 엔지니어)
+**💜 kimsang21235** (팀장 / Project Manager)
+- 프로젝트 전체 기획 및 일정 관리
 - TFLite 모델 개발 및 통합
 - Vertex AI 파이프라인 구축
-- 이미지 전처리 로직
+- 이미지 전처리 로직 개발
+- 90개 조합 루틴 규칙 설계
 
-**💙 jera0520** (본인)
-- 프로젝트 아키텍처 재구성
-- Google Cloud Run 배포 최적화
-- 코드 리팩토링 및 문서화
+**💚 gkfla317** (Frontend Developer)
+- 프론트엔드 개발 (HTML/CSS/JavaScript)
+- 반응형 UI/UX 구현
+- 차트 및 시각화 컴포넌트
+- 사용자 인터페이스 최적화
+
+**💙 jera0520** (Backend Developer)
+- Flask 백엔드 아키텍처 설계
+- RESTful API 개발
+- 데이터베이스 설계 및 최적화
+- 화해 크롤러 개발
+- Google Cloud Run 배포
 
 ---
 
@@ -198,7 +205,7 @@ FLASK_ENV=development
 
 ```bash
 # 이미 instance/skinmate.sqlite 파일이 포함되어 있습니다.
-# 3,400개 제품 데이터가 들어있어 바로 실행 가능합니다!
+# 2,684개 제품 데이터(801개 브랜드)가 들어있어 바로 실행 가능합니다!
 ```
 
 **방법 B: 처음부터 생성**
