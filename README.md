@@ -76,34 +76,39 @@
 
 ```
 SKINMATE/
-├── README.md
-├── docs/
-│   ├── screenshots/          # 실행 화면 스크린샷
-│   └── ARCHITECTURE.md       # 시스템 아키텍처 문서
-├── src/
+├── README.md                 # 프로젝트 소개
+├── requirements.txt          # Python 종속성
+├── src/                      # 소스 코드
 │   ├── app.py               # Flask 메인 애플리케이션
 │   ├── models/              # AI 모델 파일
-│   │   ├── model_test_moisture.tflite
-│   │   ├── model_test_elasticity.tflite
-│   │   └── model_test_wrinkle.tflite
+│   │   ├── model_test_moisture.tflite (3MB)
+│   │   ├── model_test_elasticity.tflite (3MB)
+│   │   └── model_test_wrinkle.tflite (3MB)
 │   ├── database/
 │   │   └── schema.sql       # DB 스키마
 │   └── utils/
 │       └── image_embedding.py
-├── data/
+├── data/                     # 데이터 파일
 │   └── routine_rules.py     # 90개 조합 루틴 규칙
-├── scripts/
+├── scripts/                  # 유틸리티 스크립트
 │   ├── crawler.py           # 화해 크롤러
 │   ├── database.py          # DB 관리
 │   └── main.py              # 크롤링 파이프라인
-├── static/
+├── static/                   # 정적 파일
 │   ├── css/                 # 스타일시트
 │   └── images/              # UI 이미지
-├── templates/               # HTML 템플릿
-├── tests/                   # 테스트 코드
-├── requirements.txt         # Python 종속성
-├── Dockerfile
-└── cloudbuild.yaml
+├── templates/                # HTML 템플릿
+├── docs/                     # 문서
+│   └── screenshots/         # 실행 화면 스크린샷
+├── deploy/                   # 배포 설정
+│   ├── Dockerfile
+│   ├── app.yaml
+│   ├── cloudbuild.yaml
+│   ├── .dockerignore
+│   └── .gcloudignore
+├── tests/                    # 테스트 코드
+└── instance/                 # DB 인스턴스 (로컬)
+    └── skinmate.sqlite      # SQLite DB (1.3MB, 샘플 포함)
 ```
 
 ### 🗂️ 데이터베이스 구조
@@ -113,6 +118,9 @@ SKINMATE/
 **analyses 테이블**: `id, user_id, timestamp, skin_type, scores_json, concerns_json, image_filename`
 
 **products 테이블**: `id, product_id, name, brand, image_url, rank, main_category, middle_category, sub_category, scraped_at`
+
+> **📝 Note**: `instance/skinmate.sqlite` 파일은 샘플 DB로, 3,400개 제품 데이터와 테스트 계정이 포함되어 있습니다.  
+> 실제 배포 시에는 PostgreSQL 등 프로덕션 DB로 마이그레이션을 권장합니다.
 
 ---
 
@@ -186,11 +194,20 @@ FLASK_ENV=development
 
 ### 3. 데이터베이스 초기화
 
+**방법 A: 샘플 DB 사용 (빠름)** ✨ 권장
+
+```bash
+# 이미 instance/skinmate.sqlite 파일이 포함되어 있습니다.
+# 3,400개 제품 데이터가 들어있어 바로 실행 가능합니다!
+```
+
+**방법 B: 처음부터 생성**
+
 ```bash
 # DB 스키마 생성
 python -c "from src.app import init_db; init_db()"
 
-# 제품 데이터 크롤링 (선택사항, 시간 소요 약 10분)
+# 제품 데이터 크롤링 (시간 소요 약 10분)
 python scripts/main.py
 ```
 
