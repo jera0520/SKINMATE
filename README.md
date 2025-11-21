@@ -1,6 +1,6 @@
 # 🌟 SKINMATE: 당신의 피부를 위한 AI 파트너
 
-![SKINMATE Banner](./docs/screenshots/skinmate_banner.png)
+![SKINMATE Banner](./docs/screenshots/skinmate_시연.gif)
 
 **SKINMATE**는 *Skin + Mate*의 합성어로,
 
