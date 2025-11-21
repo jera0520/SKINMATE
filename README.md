@@ -334,7 +334,7 @@ python src/app.py
 
 **Portfolio**: [링크 추가 예정]  
 **GitHub**: [@jera0520](https://github.com/jera0520)  
-**Email**: your-email@example.com
+**Email**: impactmarker.marketing@gmail.com
 
 ---
 
