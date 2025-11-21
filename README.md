@@ -2,9 +2,9 @@
 
 ![SKINMATE Banner](./docs/screenshots/skinmate_시연.gif)
 
-**SKINMATE**는 *Skin + Mate*의 합성어로,
+SKINMATE는 Skin + Mate의 합성어로,
 
-**AI 기술을 통해 당신의 피부를 가장 잘 이해하는 친구(Mate)**가 되어주는 맞춤형 스킨케어 추천 시스템입니다.
+AI 기술을 통해 당신의 피부를 가장 잘 이해하는 친구(Mate)가 되어주는 맞춤형 스킨케어 추천 시스템입니다.
 
 ---
 
