@@ -332,7 +332,6 @@ python src/app.py
 
 ## 📬 연락처
 
-**Portfolio**: [링크 추가 예정]  
 **GitHub**: [@jera0520](https://github.com/jera0520)  
 **Email**: impactmarker.marketing@gmail.com
 
