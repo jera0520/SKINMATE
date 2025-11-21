@@ -240,7 +240,7 @@ python src/app.py
 ### 2) 이미지 업로드
 얼굴 사진을 업로드하면 AI가 자동으로 분석을 시작합니다.
 
-![이미지 업로드](./docs/screenshots/02-upload.png)
+_(업로드 중)_
 
 ### 3) 분석 결과
 피부 타입, 종합 점수, 항목별 점수(수분/탄력/주름)를 시각적으로 확인할 수 있습니다.
@@ -250,7 +250,13 @@ python src/app.py
 ### 4) 루틴 추천
 아침/저녁 루틴을 단계별로 제품과 함께 추천합니다.
 
-![루틴 추천](./docs/screenshots/04-routines.png)
+**아침 루틴**
+
+![아침 루틴](./docs/screenshots/04-morning-routine.png)
+
+**저녁 루틴**
+
+![저녁 루틴](./docs/screenshots/04-night-routine.png)
 
 ### 5) 제품 추천
 피부 타입과 고민에 맞는 TOP 제품을 카테고리별로 추천합니다.
